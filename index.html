@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursos Web3 — Frutero Club · Talent Land 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #ff9500;
+      --red:    #f6464f;
+      --green:  #7bb82a;
+      --fg:     #1a1a1a;
+      --fg2:    #3a3a3a;
+      --bg:     #fdfaf6;
+      --muted:  #777;
+      --line:   rgba(26,26,26,0.08);
+      --card:   rgba(255,255,255,0.92);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); font-family: 'Space Grotesk', sans-serif; color: var(--fg); }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--line);
+      padding: 32px 72px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-mark {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: white;
+    }
+    .logo-name { font-size: 1.1rem; font-weight: 700; color: var(--fg); }
+    .logo-sub  { font-size: 0.78rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+    .header-event {
+      font-size: 0.78rem; font-family: 'Space Mono', monospace;
+      color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 72px 48px;
+      max-width: 1100px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 18px;
+    }
+    .hero-eyebrow::before { content:''; width:22px; height:1.5px; background:var(--orange); display:block; }
+    .hero h1 {
+      font-size: 3.6rem; font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.025em; margin-bottom: 20px;
+      max-width: 700px;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p { font-size: 1.2rem; color: var(--muted); line-height: 1.7; max-width: 600px; }
+    .stats-row {
+      display: flex; gap: 24px; margin-top: 36px; flex-wrap: wrap;
+    }
+    .stat {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; padding: 18px 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    }
+    .stat-n { font-size: 2.2rem; font-weight: 700; color: var(--orange); letter-spacing: -0.02em; line-height:1; }
+    .stat-n.g { color: var(--green); }
+    .stat-n.r { color: var(--red); }
+    .stat-l { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── Nav tabs ── */
+    .tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 0 72px;
+      margin-top: 8px;
+    }
+    .tab {
+      padding: 14px 24px; font-size: 0.95rem; font-weight: 600;
+      color: var(--muted); cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+      background: none; border-top: none; border-left: none; border-right: none;
+    }
+    .tab:hover { color: var(--fg2); }
+    .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .tab.active.g { color: var(--green); border-bottom-color: var(--green); }
+    .tab.active.r { color: var(--red); border-bottom-color: var(--red); }
+
+    /* ── Content sections ── */
+    .section { display: none; padding: 48px 72px 80px; }
+    .section.active { display: block; }
+    .section-intro {
+      font-size: 1.05rem; color: var(--muted); margin-bottom: 36px;
+      max-width: 640px; line-height: 1.7;
+    }
+    .section-intro a { color: var(--orange); text-decoration: none; }
+    .section-credit {
+      font-size: 0.8rem; color: var(--muted); margin-bottom: 28px;
+      font-family: 'Space Mono', monospace;
+    }
+    .section-credit a { color: var(--muted); }
+
+    /* ── Grant/VC cards grid ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; padding: 18px 20px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.08); transform: translateY(-1px); }
+    .card-num { font-size: 0.72rem; font-family: 'Space Mono', monospace; color: var(--muted); margin-bottom: 6px; }
+    .card-name { font-size: 1.05rem; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
+    .card-amt { font-size: 0.9rem; color: var(--orange); font-weight: 600; margin-bottom: 6px; }
+    .card-amt.g { color: var(--green); }
+    .card-link a {
+      font-size: 0.78rem; color: var(--muted); font-family: 'Space Mono', monospace;
+      text-decoration: none; word-break: break-all;
+    }
+    .card-link a:hover { color: var(--orange); }
+
+    /* ── Use cases grid ── */
+    .uc-section { margin-bottom: 40px; }
+    .uc-section h3 {
+      font-size: 1.15rem; font-weight: 700; color: var(--fg2);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .uc-list {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .uc-tag {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 5px 12px;
+      font-size: 0.88rem; color: var(--fg2); font-weight: 500;
+    }
+    .uc-tag:hover { border-color: var(--green); color: var(--green); cursor: default; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    footer p { font-size: 0.82rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+    footer a { color: var(--orange); text-decoration: none; }
+
+    @media (max-width: 680px) {
+      header, .hero, .tabs, .section, footer { padding-left: 24px; padding-right: 24px; }
+      .hero h1 { font-size: 2.4rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">F</div>
+    <div>
+      <div class="logo-name">Frutero Club</div>
+      <div class="logo-sub">Talent Land 2026</div>
+    </div>
+  </a>
+  <div class="header-event">Investor Land · Guadalajara · 2026</div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Recursos de la plática</div>
+  <h1>Financiamiento para<br><span>startups Web3</span></h1>
+  <p>Compilación de grants, VCs, aceleradoras y casos de uso de blockchain — para que no se quede solo en el deck.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n g">30</div><div class="stat-l">Grants Web3</div></div>
+    <div class="stat"><div class="stat-n">31</div><div class="stat-l">VCs y aceleradoras</div></div>
+    <div class="stat"><div class="stat-n r">144</div><div class="stat-l">Casos de uso blockchain</div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('grants',this)">🌱 Grants</button>
+  <button class="tab" onclick="show('vcs',this)">🚀 VCs</button>
+  <button class="tab" onclick="show('accels',this,'r')">⚡ Aceleradoras</button>
+  <button class="tab" onclick="show('usecases',this,'g')">🔗 Casos de Uso</button>
+</div>
+
+<!-- GRANTS -->
+<section id="grants" class="section active">
+  <p class="section-intro">Los ecosistemas Web3 pagan para que construyas en su red — sin ceder equity. Perfectos para validar tu idea antes de comprometer el cap table.</p>
+  <p class="section-credit">Fuente: <a href="https://intercepta.notion.site/30-web3-grant-programs-for-early-stage-builders" target="_blank">intercepta.notion.site — 30 web3 grant programs</a></p>
+  <div class="grid">
+    <div class="card"><div class="card-num">01</div><div class="card-name">Ethereum ESP</div><div class="card-amt">hasta $2M+ (RFP)</div><div class="card-link"><a href="https://esp.ethereum.foundation/applicants" target="_blank">esp.ethereum.foundation</a></div></div>
+    <div class="card"><div class="card-num">02</div><div class="card-name">Solana Grants</div><div class="card-amt">$10k – $100k+</div><div class="card-link"><a href="https://solana.org/grants-funding" target="_blank">solana.org/grants-funding</a></div></div>
+    <div class="card"><div class="card-num">03</div><div class="card-name">Arbitrum Foundation</div><div class="card-amt">variable, milestones</div><div class="card-link"><a href="https://arbitrum.foundation/grants" target="_blank">arbitrum.foundation/grants</a></div></div>
+    <div class="card"><div class="card-num">04</div><div class="card-name">Arbitrum DAO (Questbook)</div><div class="card-amt">multi-$M grant pools</div><div class="card-link"><a href="https://arbitrum.questbook.app" target="_blank">arbitrum.questbook.app</a></div></div>
+    <div class="card"><div class="card-num">05</div><div class="card-name">Optimism Growth Grants</div><div class="card-amt">3.89M OP pool</div><div class="card-link"><a href="https://atlas.optimism.io/missions/growth-grants" target="_blank">atlas.optimism.io</a></div></div>
+    <div class="card"><div class="card-num">06</div><div class="card-name">Optimism Audit Grants</div><div class="card-amt">969.5K OP pool</div><div class="card-link"><a href="https://atlas.optimism.io/missions/audit-grants" target="_blank">atlas.optimism.io</a></div></div>
+    <div class="card"><div class="card-num">07</div><div class="card-name">Base Builder</div><div class="card-amt">1–5 ETH + weekly reward</div><div class="card-link"><a href="https://docs.base.org/get-started/get-funded" target="_blank">docs.base.org</a></div></div>
+    <div class="card"><div class="card-num">08</div><div class="card-name">Starknet Seed</div><div class="card-amt">hasta $25k</div><div class="card-link"><a href="https://starknet.io/grants" target="_blank">starknet.io/grants</a></div></div>
+    <div class="card"><div class="card-num">09</div><div class="card-name">Starknet Growth</div><div class="card-amt">hasta $1M</div><div class="card-link"><a href="https://starknet.io/grants/growth-grants" target="_blank">starknet.io/grants/growth</a></div></div>
+    <div class="card"><div class="card-num">10</div><div class="card-name">Stellar Matching Fund</div><div class="card-amt">hasta $500k</div><div class="card-link"><a href="https://stellar.org/grants-and-funding/matching-fund" target="_blank">stellar.org/grants</a></div></div>
+    <div class="card"><div class="card-num">11</div><div class="card-name">Stellar Marketing Grant</div><div class="card-amt">hasta $500k</div><div class="card-link"><a href="https://stellar.org/grants-and-funding/marketing-grants" target="_blank">stellar.org/grants</a></div></div>
+    <div class="card"><div class="card-num">12</div><div class="card-name">BNB Builder</div><div class="card-amt">hasta $200k</div><div class="card-link"><a href="https://bnbchain.org/en/grants" target="_blank">bnbchain.org/grants</a></div></div>
+    <div class="card"><div class="card-num">13</div><div class="card-name">Avalanche infraBUIDL</div><div class="card-amt">variable (AI focus)</div><div class="card-link"><a href="https://build.avax.network/grants/infrabuidl" target="_blank">build.avax.network</a></div></div>
+    <div class="card"><div class="card-num">14</div><div class="card-name">Avalanche Retro9000</div><div class="card-amt">retro rewards</div><div class="card-link"><a href="https://retro9000.avax.network" target="_blank">retro9000.avax.network</a></div></div>
+    <div class="card"><div class="card-num">15</div><div class="card-name">Aptos Grants</div><div class="card-amt">milestone-based</div><div class="card-link"><a href="https://aptosnetwork.com/grants/ecosystem" target="_blank">aptosnetwork.com</a></div></div>
+    <div class="card"><div class="card-num">16</div><div class="card-name">Aptos Assembly</div><div class="card-amt">hasta $50k</div><div class="card-link"><a href="https://aptosnetwork.com/builders/assembly" target="_blank">aptosnetwork.com</a></div></div>
+    <div class="card"><div class="card-num">17</div><div class="card-name">Near Grants</div><div class="card-amt">variable</div><div class="card-link"><a href="https://www.near.org/funding" target="_blank">near.org/funding</a></div></div>
+    <div class="card"><div class="card-num">18</div><div class="card-name">Filecoin Open</div><div class="card-amt">hasta $50k</div><div class="card-link"><a href="https://fil.org/grants" target="_blank">fil.org/grants</a></div></div>
+    <div class="card"><div class="card-num">19</div><div class="card-name">Filecoin RetroPGF</div><div class="card-amt">500k FIL pool</div><div class="card-link"><a href="https://www.fil-retropgf.io" target="_blank">fil-retropgf.io</a></div></div>
+    <div class="card"><div class="card-num">20</div><div class="card-name">Web3 Foundation (Polkadot)</div><div class="card-amt">variable</div><div class="card-link"><a href="https://web3.foundation/funding-support/" target="_blank">web3.foundation</a></div></div>
+    <div class="card"><div class="card-num">21</div><div class="card-name">Moonbeam Ecosystem Grant</div><div class="card-amt">milestone-based</div><div class="card-link"><a href="https://moonbeam.network/build/grants/" target="_blank">moonbeam.network</a></div></div>
+    <div class="card"><div class="card-num">22</div><div class="card-name">IOTA Grants</div><div class="card-amt">hasta $50k</div><div class="card-link"><a href="https://iotadlt.foundation/grants" target="_blank">iotadlt.foundation</a></div></div>
+    <div class="card"><div class="card-num">23</div><div class="card-name">Aleo Network</div><div class="card-amt">hasta $100k</div><div class="card-link"><a href="https://aleo.org/grants/" target="_blank">aleo.org/grants</a></div></div>
+    <div class="card"><div class="card-num">24</div><div class="card-name">Chainlink BUILD</div><div class="card-amt">infra + GTM support</div><div class="card-link"><a href="https://chain.link/build-program" target="_blank">chain.link/build-program</a></div></div>
+    <div class="card"><div class="card-num">25</div><div class="card-name">Alchemy × Arbitrum</div><div class="card-amt">hasta $500k credits</div><div class="card-link"><a href="https://www.alchemy.com/arbitrum-grant" target="_blank">alchemy.com</a></div></div>
+    <div class="card"><div class="card-num">26</div><div class="card-name">Arbitrum ArbiFuel</div><div class="card-amt">hasta $10k gas</div><div class="card-link"><a href="https://blog.arbitrum.foundation/arbifuel-is-live-arbitrum-builders-claim-your-gas-fee-sponsorship/" target="_blank">arbitrum.foundation</a></div></div>
+    <div class="card"><div class="card-num">27</div><div class="card-name">Reactive Developer Fund</div><div class="card-amt">$3–10k</div><div class="card-link"><a href="https://reactive.network/devfund" target="_blank">reactive.network</a></div></div>
+    <div class="card"><div class="card-num">28</div><div class="card-name">Arbitrum Audit Program</div><div class="card-amt">audit costs covered</div><div class="card-link"><a href="https://blog.arbitrum.foundation/arbitrums-10m-audit-program-is-live-apply-to-secure-your-smart-contracts/" target="_blank">arbitrum.foundation</a></div></div>
+    <div class="card"><div class="card-num">29</div><div class="card-name">BNB RWA Incentives</div><div class="card-amt">variable</div><div class="card-link"><a href="https://www.bnbchain.org/en/blog/bnb-chain-launches-exclusive-incentive-program-for-real-world-asset-rwa-projects" target="_blank">bnbchain.org</a></div></div>
+    <div class="card"><div class="card-num">30</div><div class="card-name">J-StarX (Japan)</div><div class="card-amt">variable + exposure</div><div class="card-link"><a href="https://jetro.go.jp/services/j-starx/" target="_blank">jetro.go.jp</a></div></div>
+  </div>
+</section>
+
+<!-- VCs -->
+<section id="vcs" class="section">
+  <p class="section-intro">Capital de escala para cuando tienes tracción. A cambio de equity — pero la red de su fondo vale tanto como el cheque.</p>
+  <p class="section-credit">Fuente: <a href="https://x.com/rexan_wong/status/2002335237074809055" target="_blank">@rexan_wong en X</a></p>
+  <div class="grid">
+    <div class="card"><div class="card-name">Sequoia Arc</div><div class="card-amt">$1M · sin equity fijo</div><div class="card-link"><a href="https://www.sequoiacap.com/arc/" target="_blank">sequoiacap.com/arc</a></div></div>
+    <div class="card"><div class="card-name">OpenAI Converge</div><div class="card-amt">$1M · AI-first</div><div class="card-link"><a href="https://openai.com/converge" target="_blank">openai.com/converge</a></div></div>
+    <div class="card"><div class="card-name">HF0 Residency</div><div class="card-amt">$1M uncapped · 5%</div><div class="card-link"><a href="https://www.hf0.com" target="_blank">hf0.com</a></div></div>
+    <div class="card"><div class="card-name">a16z Speedrun</div><div class="card-amt">$750k–$1M · 7–10%</div><div class="card-link"><a href="https://a16z.com/speedrun" target="_blank">a16z.com/speedrun</a></div></div>
+    <div class="card"><div class="card-name">South Park Commons</div><div class="card-amt">$400k + $600k follow-on · 7%</div><div class="card-link"><a href="https://www.southparkcommons.com" target="_blank">southparkcommons.com</a></div></div>
+    <div class="card"><div class="card-name">betaworks AI Camp</div><div class="card-amt">$500k</div><div class="card-link"><a href="https://betaworks.com/camp" target="_blank">betaworks.com/camp</a></div></div>
+    <div class="card"><div class="card-name">neo</div><div class="card-amt">$600k uncapped SAFE · $10M floor</div><div class="card-link"><a href="https://neo.com" target="_blank">neo.com</a></div></div>
+    <div class="card"><div class="card-name">Y Combinator</div><div class="card-amt">$500k · ~7%</div><div class="card-link"><a href="https://www.ycombinator.com" target="_blank">ycombinator.com</a></div></div>
+    <div class="card"><div class="card-name">BTV The Mint</div><div class="card-amt">$500k · 10%</div><div class="card-link"><a href="https://btv.vc" target="_blank">btv.vc</a></div></div>
+    <div class="card"><div class="card-name">Boost VC</div><div class="card-amt">hasta $500k · 15%</div><div class="card-link"><a href="https://www.boost.vc" target="_blank">boost.vc</a></div></div>
+    <div class="card"><div class="card-name">Greylock Edge</div><div class="card-amt">SAFE + $500k+ credits</div><div class="card-link"><a href="https://greylock.com" target="_blank">greylock.com</a></div></div>
+    <div class="card"><div class="card-name">Entrepreneur First</div><div class="card-amt">$250k · ~9%</div><div class="card-link"><a href="https://www.joinef.com" target="_blank">joinef.com</a></div></div>
+    <div class="card"><div class="card-name">Pear VC</div><div class="card-amt">$250k–$2M</div><div class="card-link"><a href="https://pear.vc" target="_blank">pear.vc</a></div></div>
+    <div class="card"><div class="card-name">AI Grant</div><div class="card-amt">$250k uncapped</div><div class="card-link"><a href="https://aigrant.com" target="_blank">aigrant.com</a></div></div>
+    <div class="card"><div class="card-name">Antler Global</div><div class="card-amt">$200k–$250k · 8–9%</div><div class="card-link"><a href="https://www.antler.co" target="_blank">antler.co</a></div></div>
+    <div class="card"><div class="card-name">Conviction Embed</div><div class="card-amt">$150k uncapped MFN SAFE</div><div class="card-link"><a href="https://conviction.com" target="_blank">conviction.com</a></div></div>
+    <div class="card"><div class="card-name">ODF Founder Fellowship</div><div class="card-amt">$150k · 5–10%</div><div class="card-link"><a href="https://www.joinodf.com" target="_blank">joinodf.com</a></div></div>
+    <div class="card"><div class="card-name">Afore Capital</div><div class="card-amt">$100k–$500k</div><div class="card-link"><a href="https://afore.vc" target="_blank">afore.vc</a></div></div>
+    <div class="card"><div class="card-name">Google for Startups</div><div class="card-amt">hasta $100k en credits</div><div class="card-link"><a href="https://startup.google.com" target="_blank">startup.google.com</a></div></div>
+    <div class="card"><div class="card-name">Soma Capital</div><div class="card-amt">$100k</div><div class="card-link"><a href="https://soma.capital" target="_blank">soma.capital</a></div></div>
+  </div>
+</section>
+
+<!-- ACELERADORAS -->
+<section id="accels" class="section">
+  <p class="section-intro">Programa intensivo: capital, mentores y red de inversionistas en semanas. El demo day abre puertas aunque no ganes.</p>
+  <p class="section-credit">Fuente: <a href="https://x.com/rexan_wong/status/2002335237074809055" target="_blank">@rexan_wong en X</a></p>
+  <div class="grid">
+    <div class="card"><div class="card-name">MassChallenge</div><div class="card-amt g">hasta $2M · sin dilución</div><div class="card-link"><a href="https://masschallenge.org" target="_blank">masschallenge.org</a></div></div>
+    <div class="card"><div class="card-name">Techstars</div><div class="card-amt">$220k · ~5–7%</div><div class="card-link"><a href="https://techstars.com" target="_blank">techstars.com · 40+ ciudades</a></div></div>
+    <div class="card"><div class="card-name">APX</div><div class="card-amt">hasta €500k · 5%</div><div class="card-link"><a href="https://apx.ac" target="_blank">apx.ac</a></div></div>
+    <div class="card"><div class="card-name">Berkeley SkyDeck</div><div class="card-amt">$200k</div><div class="card-link"><a href="https://skydeck.berkeley.edu" target="_blank">skydeck.berkeley.edu</a></div></div>
+    <div class="card"><div class="card-name">seedcamp</div><div class="card-amt">€100k–€200k · 7%</div><div class="card-link"><a href="https://seedcamp.com" target="_blank">seedcamp.com · Europa</a></div></div>
+    <div class="card"><div class="card-name">LAUNCH Incubator</div><div class="card-amt">$125k · 6–7%</div><div class="card-link"><a href="https://www.launch.co" target="_blank">launch.co · Jason Calacanis</a></div></div>
+    <div class="card"><div class="card-name">AngelPad</div><div class="card-amt">$120k · 7%</div><div class="card-link"><a href="https://angelpad.com" target="_blank">angelpad.com</a></div></div>
+    <div class="card"><div class="card-name">500 Global</div><div class="card-amt">$112.5k · 6%</div><div class="card-link"><a href="https://500.co" target="_blank">500.co · fuerte en LATAM</a></div></div>
+    <div class="card"><div class="card-name">Startup Wise Guys</div><div class="card-amt">hasta €65k · equity</div><div class="card-link"><a href="https://startupwiseguys.com" target="_blank">startupwiseguys.com</a></div></div>
+    <div class="card"><div class="card-name">Alchemist</div><div class="card-amt">equity-based · B2B</div><div class="card-link"><a href="https://www.alchemistaccelerator.com" target="_blank">alchemistaccelerator.com</a></div></div>
+    <div class="card"><div class="card-name">Founding</div><div class="card-amt">equity-based · global</div><div class="card-link"><a href="https://founding.com" target="_blank">founding.com</a></div></div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases" class="section">
+  <p class="section-intro">144 aplicaciones reales de blockchain organizadas por industria. El problema que resuelves ya tiene un mercado — solo hay que encontrarlo.</p>
+  <p class="section-credit">Fuente: <a href="https://x.com/NicoCabrera92/status/2036908200402751838" target="_blank">@NicoCabrera92 en X</a></p>
+
+  <div class="uc-section">
+    <h3>💰 Finanzas</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Pagos internacionales</span><span class="uc-tag">Remesas</span><span class="uc-tag">Liquidación interbancaria</span><span class="uc-tag">Stablecoins</span><span class="uc-tag">Préstamos colateralizados</span><span class="uc-tag">Préstamos no colateralizados</span><span class="uc-tag">Lending / Borrowing</span><span class="uc-tag">Yield farming</span><span class="uc-tag">Staking</span><span class="uc-tag">Derivados</span><span class="uc-tag">Tokenización de activos financieros</span><span class="uc-tag">Bonos tokenizados</span><span class="uc-tag">Acciones tokenizadas</span><span class="uc-tag">Mercado monetario on-chain</span><span class="uc-tag">AMM</span><span class="uc-tag">DEX</span><span class="uc-tag">Custodia digital</span><span class="uc-tag">Gestión de tesorería</span><span class="uc-tag">Pagos programables</span><span class="uc-tag">Crowdfunding</span><span class="uc-tag">ICO / IDO / STO</span><span class="uc-tag">Seguros descentralizados</span><span class="uc-tag">Reaseguros on-chain</span><span class="uc-tag">Factoring tokenizado</span><span class="uc-tag">Financiación comercio internacional</span><span class="uc-tag">Liquidez como servicio</span><span class="uc-tag">Clearing</span><span class="uc-tag">Auditoría financiera en tiempo real</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🏛️ Infraestructura</h3>
+    <div class="uc-list">
+      <span class="uc-tag">CBDCs</span><span class="uc-tag">Sistemas de pago nacionales</span><span class="uc-tag">RTGS</span><span class="uc-tag">Interoperabilidad financiera</span><span class="uc-tag">Redes de liquidez global</span><span class="uc-tag">Emisión de dinero digital</span><span class="uc-tag">Política monetaria</span><span class="uc-tag">Dinero programable</span><span class="uc-tag">Subsidios automatizados</span><span class="uc-tag">Impuestos automatizados</span><span class="uc-tag">Tesorería pública</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>⚖️ Legal / Identidad</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Identidad digital</span><span class="uc-tag">KYC/AML</span><span class="uc-tag">Firma digital</span><span class="uc-tag">Notarización</span><span class="uc-tag">Registro de propiedad</span><span class="uc-tag">Registro mercantil</span><span class="uc-tag">Smart contracts legales</span><span class="uc-tag">Arbitraje</span><span class="uc-tag">Votación</span><span class="uc-tag">DAO</span><span class="uc-tag">Certificados digitales</span><span class="uc-tag">Licencias</span><span class="uc-tag">Patentes</span><span class="uc-tag">Propiedad intelectual</span><span class="uc-tag">Evidencias digitales</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>📦 Supply Chain</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Trazabilidad</span><span class="uc-tag">Inventarios</span><span class="uc-tag">Seguimiento envíos</span><span class="uc-tag">Certificación origen</span><span class="uc-tag">Control calidad</span><span class="uc-tag">Anti-falsificación</span><span class="uc-tag">Logística automatizada</span><span class="uc-tag">Documentación comercial</span><span class="uc-tag">Aduanas</span><span class="uc-tag">Tokenización mercancías</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🏠 Activos Reales (RWAs)</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Inmuebles tokenizados</span><span class="uc-tag">Propiedad fraccionada</span><span class="uc-tag">Alquileres automatizados</span><span class="uc-tag">Infraestructura tokenizada</span><span class="uc-tag">Energía tokenizada</span><span class="uc-tag">Commodities tokenizados</span><span class="uc-tag">Arte tokenizado</span><span class="uc-tag">Coleccionables</span><span class="uc-tag">Derechos de explotación</span><span class="uc-tag">Regalías automatizadas</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🎮 Gaming / Metaverso</h3>
+    <div class="uc-list">
+      <span class="uc-tag">NFTs</span><span class="uc-tag">Activos in-game</span><span class="uc-tag">Economías virtuales</span><span class="uc-tag">Play-to-earn</span><span class="uc-tag">Identidad digital gaming</span><span class="uc-tag">Interoperabilidad juegos</span><span class="uc-tag">Propiedad de assets</span><span class="uc-tag">Mercados secundarios</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🎵 Contenido</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Música</span><span class="uc-tag">Derechos de autor</span><span class="uc-tag">Monetización creadores</span><span class="uc-tag">Plataformas sin intermediarios</span><span class="uc-tag">Micropagos</span><span class="uc-tag">NFTs de contenido</span><span class="uc-tag">Suscripciones tokenizadas</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>💻 Datos / Tecnología</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Almacenamiento descentralizado</span><span class="uc-tag">Computación descentralizada</span><span class="uc-tag">Oráculos</span><span class="uc-tag">Compartición de datos</span><span class="uc-tag">Protección de datos</span><span class="uc-tag">Identidad IoT</span><span class="uc-tag">Machine learning descentralizado</span><span class="uc-tag">Monetización de datos</span><span class="uc-tag">Integridad de datos</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>⚡ Energía</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Smart grids</span><span class="uc-tag">Energía P2P</span><span class="uc-tag">Certificados renovables</span><span class="uc-tag">Créditos de carbono</span><span class="uc-tag">Seguimiento de emisiones</span><span class="uc-tag">Incentivos energéticos</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🏥 Salud</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Historial médico</span><span class="uc-tag">Interoperabilidad sanitaria</span><span class="uc-tag">Ensayos clínicos</span><span class="uc-tag">Trazabilidad farmacéutica</span><span class="uc-tag">Consentimientos</span><span class="uc-tag">Identidad médica</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🎓 Educación</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Certificados académicos</span><span class="uc-tag">Historial educativo</span><span class="uc-tag">Credenciales verificables</span><span class="uc-tag">Contenido educativo</span><span class="uc-tag">Reputación</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🏛️ Gobierno</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Transparencia presupuestaria</span><span class="uc-tag">Gasto público</span><span class="uc-tag">Contratación pública</span><span class="uc-tag">Registro civil</span><span class="uc-tag">Tierras</span><span class="uc-tag">Elecciones</span><span class="uc-tag">Identidad ciudadana</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🚗 Movilidad</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Identidad vehículos</span><span class="uc-tag">Historial mantenimiento</span><span class="uc-tag">Seguros movilidad</span><span class="uc-tag">Peajes automatizados</span><span class="uc-tag">Flotas</span><span class="uc-tag">Vehículos autónomos</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🛍️ Retail</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Fidelización</span><span class="uc-tag">Pagos ecommerce</span><span class="uc-tag">Puntos tokenizados</span><span class="uc-tag">Autenticidad de productos</span><span class="uc-tag">Supply chain retail</span><span class="uc-tag">Marketplaces descentralizados</span>
+    </div>
+  </div>
+
+  <div class="uc-section">
+    <h3>🌐 Otros</h3>
+    <div class="uc-list">
+      <span class="uc-tag">Filantropía</span><span class="uc-tag">Comunidades</span><span class="uc-tag">Reputación</span><span class="uc-tag">Freelance global</span><span class="uc-tag">Contratos laborales</span><span class="uc-tag">Membresías</span><span class="uc-tag">Crowdsourcing</span><span class="uc-tag">Redes sociales descentralizadas</span><span class="uc-tag">Gobernanza corporativa</span><span class="uc-tag">Derechos deportivos</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Hecho con 🍊 por <a href="https://frutero.club" target="_blank">Frutero Club</a> · Talent Land 2026</p>
+  <p>Plática de <a href="https://x.com/valecreativo" target="_blank">@valecreativo</a> · COO, Frutero Club</p>
+</footer>
+
+<script>
+function show(id, btn, color) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active','g','r'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (color) btn.classList.add(color);
+}
+</script>
+</body>
+</html>
